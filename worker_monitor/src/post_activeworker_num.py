@@ -1,5 +1,11 @@
+import configparser
+inifile = configparser.ConfigParser()
+inifile.read('../config.ini', 'UTF-8')
+
+pwd = inifile.get("path", "pwd")
+
 import sys
-sys.path.append("${Workspace}/worker_monitor/lib/")
+sys.path.append(pwd)
 import MiningMonitor as mm
 
 
