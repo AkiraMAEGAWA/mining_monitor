@@ -17,12 +17,16 @@ ltc_monitor = mm.MiningMonitor(_currency="ltc")
 
 active_ethworkers = eth_monitor.get_eth_currentacitiveworkers()
 active_ltcworkers = ltc_monitor.get_ltc_currentacitiveworkers()
+print("ethminerのworker数は {0} です".format(active_ethworkers))
+print("ltcminerのworker数は {0} です".format(active_ltcworkers))
+# eth_monitor.post2slack(_text=f"ethminerのworker数は {active_ethworkers} です")
+# ltc_monitor.post2slack(_text=f"ltcminerのworker数は {active_ltcworkers} です")
+eth_monitor.post2slack(_text="ethminerのworker数は {0} です".format(active_ethworkers))
+ltc_monitor.post2slack(_text="ltcminerのworker数は {0} です".format(active_ltcworkers))
 
-print(f"--{now.day}日: {now.hour}時:  {now.minute}分 ---- \n ---- active worker状況 ---- ")
-eth_monitor.post2slack(_text=f"--{now.day}日: {now.hour}時: {now.minute}分 ---- \n ----activeworker状況---")
-
-print(f"ethminer worker: {active_ethworkers}")
-print(f"ltcminer worker: {active_ltcworkers}")
-eth_monitor.post2slack(_text=f"ethminer worker:  {active_ethworkers}")
-ltc_monitor.post2slack(_text=f"ltcminer worker:  {active_ltcworkers}\n")
-
+red_ethworkers = eth_monitor.get_red_workers()
+print(red_ethworkers)
+for i in red_ethworkers:
+    # eth_monitor.post2slack(_text=f"red worker: {i}\n")
+    eth_monitor.post2slack(_text="red worker: {0}\n".format(i))
+    
