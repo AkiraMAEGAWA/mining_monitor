@@ -23,10 +23,3 @@ print("ltcminerのworker数は {0} です".format(active_ltcworkers))
 # ltc_monitor.post2slack(_text=f"ltcminerのworker数は {active_ltcworkers} です")
 eth_monitor.post2slack(_text="ethminerのworker数は {0} です".format(active_ethworkers))
 ltc_monitor.post2slack(_text="ltcminerのworker数は {0} です".format(active_ltcworkers))
-
-red_ethworkers = eth_monitor.get_red_workers()
-print(red_ethworkers)
-for i in red_ethworkers:
-    # eth_monitor.post2slack(_text=f"red worker: {i}\n")
-    eth_monitor.post2slack(_text="red worker: {0}\n".format(i))
-    
