@@ -6,6 +6,9 @@ ethermineとlitecoinpoolのdashboardから以下の2点の情報
 
 を取得し,slackに通知します. 
 
+
+## 手順
+
 config.ini.exampleをconfig.iniに変更して
 
 * webhook_url
