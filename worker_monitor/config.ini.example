@@ -1,0 +1,7 @@
+[slack]
+webhook_url=https://hoge.jp
+hoge=piyo
+
+[wallet_info]
+ethermine_wallet=hogehoge
+litecoinpool_apikey=hogehoge
