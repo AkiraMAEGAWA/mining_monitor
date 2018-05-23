@@ -16,7 +16,7 @@ class MiningMonitor(object):
         import configparser
 
         inifile = configparser.ConfigParser()
-        inifile.read('../config.ini', 'UTF-8')
+        inifile.read('../../config/config.ini', 'UTF-8')
         # print(inifile.get("slack", "hoge"))
         # print(inifile.get("slack", "webhook_url"))
         # print(type(inifile.get("slack", "webhook_url")))
