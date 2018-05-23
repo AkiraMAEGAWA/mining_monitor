@@ -1,6 +1,6 @@
 import configparser
 inifile = configparser.ConfigParser()
-inifile.read('../config.ini', 'UTF-8')
+inifile.read('../../config/config.ini', 'UTF-8')
 
 pwd = inifile.get("path", "pwd")
 
