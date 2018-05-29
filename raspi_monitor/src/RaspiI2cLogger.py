@@ -63,7 +63,7 @@ class RaspiI2cLogger(object):
             #time.sleep(599)
             time.sleep(5)
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
     i2c = RaspiI2cLogger()
     i2c.logging()
         
