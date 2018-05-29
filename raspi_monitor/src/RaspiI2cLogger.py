@@ -48,7 +48,7 @@ class RaspiI2cLogger(object):
             print("using invalid address")           
             return "invalid"
 
-    def logging(self):
+    def logging(self, time_interval=5):
         while True:
             print(self.get_temperature())
             #for notifing to slack
@@ -61,7 +61,7 @@ class RaspiI2cLogger(object):
 
             #time.sleep(1)
             #time.sleep(599)
-            time.sleep(5)
+            time.sleep(time_interval)
 
 if __name__ == "__main__":
     i2c = RaspiI2cLogger()
