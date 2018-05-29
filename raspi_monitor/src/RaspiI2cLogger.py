@@ -11,9 +11,11 @@ class RaspiI2cLogger(object):
         self.i2c = SMBus(1)
         self.address = 0x48
         self.block = None
+
     def is_address_exist(self):
         try:
-           self.block = self.i2c.read_i2c_block_data(self.address, 0x00, 2)
+            time.sleep(1)
+            self.block = self.i2c.read_i2c_block_data(self.address, 0x00, 2)
         except OSError as e:
             print("Oops...  change address...")
 
@@ -34,6 +36,7 @@ class RaspiI2cLogger(object):
 
 
     def get_temperature(self):
+        iteration = 0
         if self.is_address_exist():
             val = self.block[0] << 8
             val = val | self.block[1]
@@ -46,7 +49,9 @@ class RaspiI2cLogger(object):
             return (val/16.0)
         else:
             print("using invalid address")           
-            return "invalid"
+            iteration += 1
+            print(iteration)
+            return self.get_temperature()
 
     def logging(self, time_interval=5):
         while True:
