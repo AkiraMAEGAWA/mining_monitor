@@ -10,10 +10,10 @@ class RaspiI2cLogger(object):
     def __init__(self):
         self.i2c = SMBus(1)
         self.address = 0x48
-   
+        self.block = None
     def is_address_exist(self):
         try:
-            block = self.i2c.read_i2c_block_data(self.address, 0x00, 2)
+           self.block = self.i2c.read_i2c_block_data(self.address, 0x00, 2)
         except OSError as e:
             print("Oops...  change address...")
 
@@ -34,9 +34,9 @@ class RaspiI2cLogger(object):
 
 
     def get_temperature(self):
-        if is_address_exist():
-            val = block[0] << 8
-            val = val | block[1]
+        if self.is_address_exist():
+            val = self.block[0] << 8
+            val = val | self.block[1]
             val = val >> 3
 
             if (val >= 4096):
@@ -50,7 +50,7 @@ class RaspiI2cLogger(object):
 
     def logging(self):
         while True:
-            print(get_temperature())
+            print(self.get_temperature())
             #for notifing to slack
             #slack = slackweb.Slack(url=inifile.get("slack", "webhook_url"))
             #slack.notify(text=str(val/16.0))
