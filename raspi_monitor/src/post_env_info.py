@@ -8,7 +8,7 @@ args = sys.argv
 now = datetime.datetime.now()
 
 event_name = "add_temperature"
-if args is None:
+if len(args) <= 1:
     message = "hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
 else:
     message = str(args[1:])
