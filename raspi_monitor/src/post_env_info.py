@@ -21,9 +21,16 @@ elif len(args) == 3:
     sleep_time = args[1]
     is_horizen = args[2]
 
+elif len(args) == 4:
+    sleep_time = args[1]
+    is_horizen = args[2]
+    where_to_place = args[3]
+
+
 else:
     sleep_time = 60
-    is_horizen = False
+    is_horizen = False 
+    where_to_place = "B"
 
 #spreadsheetに横並べor縦並べ
 if is_horizen:
@@ -47,5 +54,5 @@ else:  #vertical
         message = str(i2c.get_temperature())
         #message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
      
-        ifttt.post(event_name=event_name, where_to_place= "H" + str(row), message=message)
+        ifttt.post(event_name=event_name, where_to_place= where_to_place + str(row), message=message)
         time.sleep(sleep_time)
