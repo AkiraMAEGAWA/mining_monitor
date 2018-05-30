@@ -2,6 +2,7 @@ import IftttSender
 import RaspiI2cLogger
 import configparser
 import datetime
+import time
 
 import sys
 args = sys.argv
