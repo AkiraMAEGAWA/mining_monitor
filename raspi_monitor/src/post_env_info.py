@@ -12,6 +12,7 @@ ifttt = IftttSender.IftttSender(api_key=inifile.get("webhook", "api_key"))
 
 i2c = RaspiI2cLogger.RaspiI2cLogger()
 
+
 if len(args) == 2:
     sleep_time = args[1]
     is_horizen = False
@@ -35,6 +36,7 @@ if is_horizen:
 	    # message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
 
 	    ifttt.post(event_name=event_name, where_to_place=column + str(1), message=message)
+        time.sleep(sleep_time)
         
 else:  #vertical
 	for row in range(3, 103):
@@ -46,4 +48,4 @@ else:  #vertical
 	    #message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
 	    
 	    ifttt.post(event_name=event_name, where_to_place= "H" + str(row), message=message)
-	    time.sleep(60)
+	    time.sleep(sleep_time)
