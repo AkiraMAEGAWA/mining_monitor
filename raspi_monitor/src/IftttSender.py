@@ -17,8 +17,17 @@ class IftttSender(object):
         headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0",}
         data = {"value1": where_to_place, "value2": message, "value3": args}
         data = urllib.parse.urlencode(data).encode("utf-8")
-        req =urllib.request.Request(url=url, headers=headers) 
-        res = urllib.request.urlopen(req, data=data)
+        
+         #URLErrorが発生した場合、1度だけretryする
+        try: 
+            req = urllib.request.Request(url=url, headers=headers) 
+            res = urllib.request.urlopen(req, data=data)
+        
+        except URLError:
+            print("Error Occured...  try one more time")
+            req = urllib.request.Request(url=url, headers=headers) 
+            res = urllib.request.urlopen(req, data=data)
+            
         print(res)
 
         #data = json.loads(res.read())
