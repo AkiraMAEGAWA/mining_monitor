@@ -45,7 +45,7 @@ else:  #vertical
         event_name = "add_temperature"
    
         message = str(i2c.get_temperature())
-       #message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
+        #message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
      
-       ifttt.post(event_name=event_name, where_to_place= "H" + str(row), message=message)
-       time.sleep(sleep_time)
+        ifttt.post(event_name=event_name, where_to_place= "H" + str(row), message=message)
+        time.sleep(sleep_time)
