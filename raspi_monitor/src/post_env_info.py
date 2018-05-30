@@ -12,15 +12,38 @@ ifttt = IftttSender.IftttSender(api_key=inifile.get("webhook", "api_key"))
 
 i2c = RaspiI2cLogger.RaspiI2cLogger()
 
+if len(args) == 2:
+    sleep_time = args[1]
+    is_horizen = False
 
-for column in [chr(i) for i in range(65,90)]:
+elif len(args) == 3:
+	sleep_time = args[1]
+    is_horizen = args[2]
 
-    now = datetime.datetime.now()
-    event_name = "add_temperature"
-    if len(args) <= 1:
-        message = str(i2c.get_temperature())
-        message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
-    else:
-        message = str(args[1:])
+else:
+	sleep_time = 60
+    is_horizen = False
 
-    ifttt.post(event_name=event_name, where_to_place=column + str(1), message=message)
+#spreadsheetに横並べor縦並べ
+if is_horizen:
+	for column in [chr(i) for i in range(65,90)]:
+
+	    now = datetime.datetime.now()
+	    event_name = "add_temperature"
+
+	    message = str(i2c.get_temperature())
+	    # message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
+
+	    ifttt.post(event_name=event_name, where_to_place=column + str(1), message=message)
+        
+else:  #vertical
+	for row in range(3, 103):
+
+	    now = datetime.datetime.now()
+	    event_name = "add_temperature"
+	    
+	    message = str(i2c.get_temperature())
+	    #message += "\n hello from raspi with ifrttt v2 " + str(now.day) + "/" + str(now.hour) + "/" + str(now.minute)
+	    
+	    ifttt.post(event_name=event_name, where_to_place= "H" + str(row), message=message)
+	    time.sleep(60)
